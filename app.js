@@ -20,33 +20,29 @@ async function connectDB() {
 
 connectDB();
 
-
 // Enable CORS for all routes
 app.use(cors());
 app.use(express.json());
 
-
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json()); // Parse request body JSON
-app.use(bodyParser.urlencoded({ extended: true })); // Parse request body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
+==============================
+  ROUTES
+==============================
+*/
 
+// ✅ Conditions routes
 const firstAidRoutes = require("./api/routes/first_aidRoutes");
 app.use("/first-aid", firstAidRoutes);
-// const UserRouter = require('./api/routes/userRoutes');
-// app.use("/users",UserRouter);
 
-// const JobApplicationRouter = require('./api/routes/jobApplicationRoutes');
-// app.use("/job_app",JobApplicationRouter);
+// ✅ Identification routes (חדש - זה מה שחסר לך!)
+const identificationRoutes = require("./api/routes/identificationController");
+app.use("/first-aid", identificationRoutes);
 
-// const JobRouter = require('./api/routes/jobRoutes');
-// app.use("/job",JobRouter);
-
-// const CompanyRouter = require('./api/routes/companyRoutes');
-// app.use("/company",CompanyRouter);
-
-
-
-
+// ✅ Optional: health check
+app.get("/health", (req, res) => res.json({ ok: true }));
 
 module.exports = app;
