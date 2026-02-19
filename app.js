@@ -38,9 +38,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const firstAidRoutes = require("./api/routes/first_aidRoutes");
 app.use("/first-aid", firstAidRoutes);
 
-// ✅ Identification routes (חדש - זה מה שחסר לך!)
-// const identificationRoutes = require("./api/routes/identificationController");
-// app.use("/first-aid", identificationRoutes);
+
+const identificationRoutes = require("./api/routes/identificationController");
+app.use("/first-aid-i", identificationRoutes);
 
 // ✅ Optional: health check
 app.get("/health", (req, res) => res.json({ ok: true }));
